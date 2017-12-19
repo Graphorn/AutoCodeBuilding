@@ -21,7 +21,7 @@ project_name  项目名称
 project_url  项目Github地址
 ```
 
-### 三、Commits
+### 三、Commit
 
 ```js
 关联Project表
