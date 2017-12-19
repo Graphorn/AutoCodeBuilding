@@ -21,9 +21,10 @@ project_name  项目名称
 project_url  项目Github地址
 ```
 
-### 二、BuildInfo
+### 三、Commits
 
 ```js
+关联Project表
 id  ruby默认添加的ID
 project 所属项目，对应Project中的id
 loginfo  build信息
