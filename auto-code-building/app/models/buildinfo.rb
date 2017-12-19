@@ -1,0 +1,2 @@
+class Buildinfo < ApplicationRecord
+end
