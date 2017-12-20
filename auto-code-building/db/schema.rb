@@ -10,13 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171219022650) do
+ActiveRecord::Schema.define(version: 20171220161130) do
 
   create_table "buildinfos", force: :cascade do |t|
     t.string "project"
     t.string "loginfo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "author"
+    t.string "user_name"
+    t.string "log"
+    t.string "branch"
+    t.string "commit_url"
+    t.string "commmit_msg"
+    t.string "build_time"
+    t.string "build_status"
   end
 
   create_table "projects", force: :cascade do |t|
@@ -33,6 +41,9 @@ ActiveRecord::Schema.define(version: 20171219022650) do
     t.string "user_type"
     t.string "user_name"
     t.string "pwd"
+    t.string "last_login"
+    t.string "projects_num"
+    t.string "buildinfos_num"
   end
 
 end
