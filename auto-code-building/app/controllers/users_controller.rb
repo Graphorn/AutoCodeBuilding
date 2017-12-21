@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+    skip_before_action :verify_authenticity_token
+    
     # 注册 
     def regist
         @user = User.new
@@ -12,7 +14,7 @@ class UsersController < ApplicationController
             render json: "{\"status\": \"0\", \"id\": \"\", \"message\": \"用户已存在\"}"
         end
         if @user.save
-            render json: "{\"status\": \"1\", \"id\": \"#{@user.id}\", \"message\": \"\"}"
+            render json: "{\"status\": \"1\", \"id\": \"#{@user.id}\", \"message\": \"注册成功\"}"
         else 
             render json: "{\"status\": \"0\", \"id\": \"\", \"message\": \"\"}"
         end 
