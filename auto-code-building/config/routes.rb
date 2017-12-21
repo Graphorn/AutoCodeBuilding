@@ -4,14 +4,11 @@ Rails.application.routes.draw do
 
   post "users/regist" => "users#regist"
   post "users/login" => "users#login"
-  post "projects/addproject" => "projects#addProject"
-  get "projects/getprojects" => "projects#getProjects"
+  post "users/addproject" => "users#addProject"
+  get "users/getprojects" => "users#getProjects"
   get "users/getusers" => "users#getUsers"
   get "buildinfos/getBuildInfo" => "buildinfos#getBuildInfo"
-  post "projects/delproject" => "projects#delProject"
-  post "buildinfos/addbuildinfo" => "buildinfos#addBuildinfo"
-  post "buildinfos/delbuildinfo" => "buildinfos#delBuildinfo"
 
   get '/index' => "application#index"
-
+  post 'push/info'
 end
