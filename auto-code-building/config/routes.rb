@@ -11,4 +11,6 @@ Rails.application.routes.draw do
 
   get '/index' => "application#index"
   post 'push/info'
+  
+  get "users/github_oauth" => "users#gitubOAuth"
 end
