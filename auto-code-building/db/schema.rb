@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171221074257) do
+ActiveRecord::Schema.define(version: 20180109082349) do
 
   create_table "buildinfos", force: :cascade do |t|
     t.string "project"
@@ -19,7 +19,6 @@ ActiveRecord::Schema.define(version: 20171221074257) do
     t.datetime "updated_at", null: false
     t.string "author"
     t.string "user_name"
-    t.string "log"
     t.string "branch"
     t.string "commit_url"
     t.string "commmit_msg"
@@ -33,8 +32,8 @@ ActiveRecord::Schema.define(version: 20171221074257) do
     t.string "project_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "user_name"
-    t.string "buildinfo_num"
+    t.string "buildinfo_num_all"
+    t.string "users"
   end
 
   create_table "users", force: :cascade do |t|
@@ -46,6 +45,9 @@ ActiveRecord::Schema.define(version: 20171221074257) do
     t.string "last_login"
     t.string "projects_num"
     t.string "buildinfos_num"
+    t.string "imgurl"
+    t.string "projects"
+    t.string "name"
   end
 
 end

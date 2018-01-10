@@ -16,6 +16,8 @@ require "rails/test_unit/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+
+
 module AutoCodeBuilding
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
@@ -30,5 +32,7 @@ module AutoCodeBuilding
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
+    config.active_record.default_timezone = :local  
+    config.time_zone = 'Beijing'
   end
 end

@@ -2,8 +2,8 @@ class BuildinfosController < ApplicationController
     skip_before_action :verify_authenticity_token
     # 获取build信息，log,author(github 作者),user_name,project,branch,commit_url,commmit_msg,build_time,build_status
     def getBuildInfo
-        # @buildInfos = Buildinfo.where(project: params[:project_name], user_name: params[:user_name])
-        @buildInfos = Buildinfo.all
+        @buildInfos = Buildinfo.where(project: params[:project_name], author: params[:author])
+        #@buildInfos = Buildinfo.all
         if @buildInfos
             render json: "{\"status\": 1, \"message\": \"\", \"buildinfoList\": #{@buildInfos.to_json}}"
         else

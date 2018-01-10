@@ -77,7 +77,7 @@ class PushController < ApplicationController
     def addBuild(user_name, project_name, log_info, author,branch,commit_url, commit_msg, build_status)
         @userName = user_name
         @projectName = project_name
-        if User.find_by(user_name:@userName) and Project.find_by(project_name:@projectName)
+        if User.find_by(user_name:@userName) and Project.find_by(project_name:@projectName, author: author)
             @buildInfo = Buildinfo.new
             @buildInfo.user_name = @userName
             @buildInfo.loginfo = log_info
@@ -93,13 +93,13 @@ class PushController < ApplicationController
                 if @user.buildinfos_num == nil
                     @user.buildinfos_num = 0
                 end
-                @user.buildinfos_num = @user.buildinfos_num + 1
+                @user.buildinfos_num = (@user.buildinfos_num.to_i + 1).to_s
                 @user.save
                 @project = Project.find_by(project_name:@projectName)
-                if @project.buildinfo_num == nil
-                    @project.buildinfo_num = 0 
+                if @project.buildinfo_num_all == nil
+                    @project.buildinfo_num_all = "0"
                 end
-                @project.buildinfo_num = @project.buildinfo_num + 1
+                @project.buildinfo_num_all = (@project.buildinfo_num_all.to_i + 1).to_s
                 @project.save
                 return 1
             else 
