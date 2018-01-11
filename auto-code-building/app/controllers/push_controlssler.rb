@@ -2,6 +2,7 @@ require "net/http"
 require "uri"
 class PushController < ApplicationController
     skip_before_action :verify_authenticity_token
+    protect_from_forgery with: :exception
     def info
         # @word = "Hello World"
         # puts word
