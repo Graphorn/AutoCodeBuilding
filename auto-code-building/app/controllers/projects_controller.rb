@@ -3,7 +3,7 @@ require 'json'
 require "open-uri"
 class ProjectsController < ApplicationController
     skip_before_action :verify_authenticity_token
-    protect_from_forgery with: :exception
+    # protect_from_forgery with: :exception
     # 添加项目
     def addProject
         @userName = params[:username]

@@ -1,6 +1,6 @@
 class BuildinfosController < ApplicationController
     skip_before_action :verify_authenticity_token
-    protect_from_forgery with: :exception
+    # protect_from_forgery with: :exception
     # 获取build信息，log,author(github 作者),user_name,project,branch,commit_url,commmit_msg,build_time,build_status
     def getBuildInfo
         @buildInfos = Buildinfo.where(project: params[:project_name], author: params[:author])
