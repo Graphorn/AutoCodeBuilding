@@ -2,6 +2,8 @@ require 'sinatra'
 require 'rest-client'
 require 'json'
 
+require 'open3'
+
 require 'net/https'
 require 'uri'
 class UsersController < ApplicationController
@@ -165,6 +167,23 @@ class UsersController < ApplicationController
         # print @user.projects
         # @user.projects = ""
         # @user.save
+        
+        logs = ""
+        infoLog = ""
+        command1 = "sh rake.sh "
+        Open3.popen3(command1) do |stdin, stdout, stderr|
+            
+            # stderr.each_line {|line| logs << line.chomp }
+            
+            stdout.each_line {|line| infoLog << line }
+            stderr.each_line {|line| logs << line }
+            
+            # stderr.close
+        end
+        
+        puts infoLog
+        puts "----------:"
+        puts logs
         
         @buildInfos = Buildinfo.where(author: "husterxsp", project: "RubyTest")
         print @buildInfos.size
