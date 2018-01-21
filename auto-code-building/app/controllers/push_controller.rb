@@ -31,8 +31,8 @@ class PushController < ApplicationController
             status = "true"
         end
         
-        logs = "{errlog:" + errlog + ", infoLog:" + infoLog + "}"
-        addBuild(params[:repository][:owner][:name], params[:repository][:name], logs, 
+        # logs = '{"errlog": "' + errlog + '", "infoLog": "' + infoLog + '"}'
+        addBuild(params[:repository][:owner][:name], params[:repository][:name], infoLog, 
                     params[:repository][:owner][:name],params[:repository][:default_branch],
                     params[:commits][0][:url], params[:commits][0][:message], status)
 
