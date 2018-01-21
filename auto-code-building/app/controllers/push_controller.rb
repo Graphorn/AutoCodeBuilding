@@ -1,47 +1,45 @@
 require "net/http"
 require "uri"
+require 'open3'
+
 class PushController < ApplicationController
     skip_before_action :verify_authenticity_token
     # protect_from_forgery with: :exception
     def info
-        # @word = "Hello World"
-        # puts word
+
         url = "https://github.com/" + params[:repository][:full_name] +"/"
-        dirname = "test"+Random.rand(1000).to_s
-        # puts url,dirname
-        require 'open3'
+        # url = "https://github.com/husterxsp/hw-ruby-intro"
+        dirname = "test/test"+Random.rand(1000).to_s
+
         command1 = "sh compile.sh " + url + " " + dirname
-        # puts command1
-        logs = ""
+        
+        errlog = ""
+        infoLog = ""
         Open3.popen3(command1) do |stdin, stdout, stderr|
-        #     # puts "a."
-            # stderr.each_line {|line| logs << line.chomp }
-            stderr.each_line {|line| logs << line }
-            # stderr.close
+            stderr.each_line {|line| errlog << line }
+            stdout.each_line {|line| infoLog << line }
         end
-        puts "logs:"
-        puts logs
+        puts "errlog:"
+        puts errlog
+        
+        puts "infoLog:"
+        puts infoLog
+        
         # 编译是否成功
         status = "false"
-        if logs==''
+        if errlog == ''
             status = "true"
         end
-            
+        
+        logs = "{errlog:" + errlog + ", infoLog:" + infoLog + "}"
         addBuild(params[:repository][:owner][:name], params[:repository][:name], logs, 
                     params[:repository][:owner][:name],params[:repository][:default_branch],
                     params[:commits][0][:url], params[:commits][0][:message], status)
-        
-        # Open3.popen3(command1) do |stdin, stdout, stderr|
-        #     # puts "a."
-        #     stderr.each_line { |line| puts line }
-        #     # puts "b."
-        #     # stdout.each_line { |line| puts line }
-        # end
+
         command2 = "sh clear.sh " + dirname
         Open3.popen3(command2)
         
-        
-        # stdin, stdout, stderr = Open3.popen3( `sh test.sh`)
+        # stdin, stdout, stderr = Open3.popen3( `sh compile.sh https://github.com/husterxsp/hw-ruby-intro test/111`)
         # puts "stdout"
         # puts stdout.gets
         # puts "stderr"
