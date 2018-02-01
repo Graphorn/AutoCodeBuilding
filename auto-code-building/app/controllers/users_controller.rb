@@ -115,6 +115,32 @@ class UsersController < ApplicationController
         redirect_to "/"
     end
     
+    # 批量删除用户以及用户的所有记录
+    def delUsers
+        @usersList = params[:usernames].split(",")
+        @usersList.each do |username|
+            @user = User.find_by(user_name: username)
+            @user.destroy
+            
+            Buildinfo.where(user_name: username).each do |build|
+                build.destroy
+            end
+            
+            Project.all.each do |p|
+                @pusers = p.users.split(",")
+                @nusers = []
+                @pusers.each do |pname|
+                    if pname != username
+                        @nusers.insert(0,pname)
+                    end
+                end
+                p.users = @nusers.join(",")
+                p.save
+            end
+        end
+        render json: "{\"status\": 1, \"message\": '删除成功'}"
+    end 
+    
     def test
         
         # require "open-uri" #如果有GET请求参数直接写在URI地址中 
